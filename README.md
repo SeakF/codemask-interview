@@ -10,6 +10,9 @@
 ## To view data run:
 
 ```npm run prisma-studio```
+```http://localhost:5555/```
+
+initial data is seeded for country codes
 
 
 ## To see all endpoints visit swagger url:
