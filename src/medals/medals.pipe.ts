@@ -6,7 +6,6 @@ import {
 } from '@nestjs/common';
 import { plainToInstance } from 'class-transformer';
 import { validate } from 'class-validator';
-import { CreateCountriesDto, CreateOneDto, UpdateByIdsDto, UpdateOneByIdDto, UpdateOneByCountryDto, UpdateByCountriesDto } from './medals.dto';
 
 
 @Injectable()
@@ -20,19 +19,11 @@ export class MedalsValidationPipe implements PipeTransform {
 		if (errors.length > 0) {
 			throw new BadRequestException('Validation failed');
 		}
-		
-		if (
-			value &&
-			(
-				value instanceof CreateCountriesDto ||
-				value instanceof CreateOneDto ||
-				value instanceof UpdateByIdsDto ||
-				object instanceof UpdateOneByIdDto ||
-				object instanceof UpdateOneByCountryDto ||
-				value instanceof UpdateByCountriesDto ||
-				(Array.isArray(value) && value.every(item => typeof item.country === 'string' ))
-			)
-		) {
+
+		if (value && (
+			value.country ||
+			Array.isArray(value) && value.every(item => typeof item.country === 'string' )
+		)) {
 			const transformCountryToUppercase = (obj: any) => {
 				if (typeof obj === 'object' && obj !== null && obj.country) {
 					obj.country = obj.country.toUpperCase();
@@ -43,7 +34,7 @@ export class MedalsValidationPipe implements PipeTransform {
 
 			transformCountryToUppercase(value)
 		}
-		
+
 		return value;
 	}
 	

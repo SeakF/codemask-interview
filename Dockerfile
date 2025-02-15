@@ -11,6 +11,12 @@ RUN npm ci
 
 COPY . .
 
+RUN addgroup -S codemask && adduser -S codemask -G codemask
+
+RUN chown -R codemask:codemask /app
+
+USER codemask
+
 EXPOSE 3000
 
 CMD [ "npm", "run", "start:dev" ]
