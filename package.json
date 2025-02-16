@@ -19,8 +19,8 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "build-docker-dev": "docker build -t codemask --target development .",
-    "build-docker-prisma": "docker exec codemask-app-1 sh -c \"npx prisma generate && npx prisma db push && npx prisma db seed\"",
-    "prisma-studio": "docker exec codemask-app-1 sh -c \"npx prisma studio\""
+    "build-docker-prisma": "docker exec codemask-interview-app-1 sh -c \"npx prisma generate && npx prisma db push && npx prisma db seed\"",
+    "prisma-studio": "docker exec codemask-interview-app-1 sh -c \"npx prisma studio\""
   },
   "prisma": {
     "seed": "ts-node prisma/seed.ts"
